@@ -24,10 +24,19 @@ public class Movement : MonoBehaviour
     private float RotationSpeed = 1;
     [SerializeField]
     private float FireRate = 1;
+    private float TimeToNextFire = 0;
+
+    private float FireSpeed = 1;
+    
 
     private Controls Controls;
 
     private Vector2 MoveDirection = Vector2.zero;
+
+    [Header("Container")]
+    [SerializeField]
+    private GameObject BuletHolder;
+
 
     [Header("Prefab")]   
     [SerializeField]
@@ -62,7 +71,7 @@ public class Movement : MonoBehaviour
     {
         MoveDirection = context.ReadValue<Vector2>();
         Jets.enabled = true;
-        Debug.Log("Moving " + MoveDirection.x + "^" + MoveDirection.y);
+        //Debug.Log("Moving " + MoveDirection.x + "^" + MoveDirection.y);
 
     }
 
@@ -91,12 +100,21 @@ public class Movement : MonoBehaviour
                 }
             }
 
-            Debug.Log($"target {targetAngle} max rotation {maxRotationAngle} pre diff {currentAngle - angle} diff {diff}");
+            //Debug.Log($"target {targetAngle} max rotation {maxRotationAngle} pre diff {currentAngle - angle} diff {diff}");
             Ship.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
             //Ship.transform.up = MoveDirection;
             Ship.transform.position += new Vector3(MoveSpeed * Time.deltaTime * MoveDirection.x, MoveSpeed * Time.deltaTime * MoveDirection.y);
             Camera.transform.position = new Vector3(Ship.transform.position.x,Ship.transform.position.y,Camera.transform.position.z);
         }
+
+        TimeToNextFire -= Time.deltaTime;
+        if (TimeToNextFire <= 0)
+        {
+            Instantiate(WeaponPrefab, Ship.transform.position, Ship.transform.rotation,BuletHolder.transform);
+            TimeToNextFire = FireRate;
+        }
+        
+
     }
 
     private float MakeAnglePossitive(float input)
