@@ -11,19 +11,27 @@ public class Movement : MonoBehaviour
     [SerializeField]
     private SpriteRenderer Jets;
 
+
+   
+
     [SerializeField] 
     private GameObject Camera;
 
+    [Header("Speeds")]
     [SerializeField]
     private float MoveSpeed = 1;
     [SerializeField]
     private float RotationSpeed = 1;
+    [SerializeField]
+    private float FireRate = 1;
 
     private Controls Controls;
 
     private Vector2 MoveDirection = Vector2.zero;
 
-    
+    [Header("Prefab")]   
+    [SerializeField]
+    private GameObject WeaponPrefab;
 
     // Start is called before the first frame update
     void Start()
