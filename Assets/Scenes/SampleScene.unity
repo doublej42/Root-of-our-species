@@ -462,6 +462,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1461822120206566, guid: 2ce1fb9d977e03b49a1ce0113faf945e, type: 3}
+      propertyPath: m_TagString
+      value: MovementEffect
+      objectReference: {fileID: 0}
     - target: {fileID: 1988959072326566, guid: 2ce1fb9d977e03b49a1ce0113faf945e, type: 3}
       propertyPath: m_Name
       value: ship
@@ -531,7 +535,7 @@ GameObject:
   - component: {fileID: 1428633244}
   m_Layer: 0
   m_Name: Movement Controller
-  m_TagString: Untagged
+  m_TagString: EditorOnly
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -549,7 +553,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Ship: {fileID: 1809949293}
-  Camera: {fileID: 0}
+  Camera: {fileID: 519420028}
   MoveSpeed: 1
   RotationSpeed: 0.2
 --- !u!4 &1428633245

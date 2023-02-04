@@ -8,6 +8,8 @@ public class Movement : MonoBehaviour
 {
     [SerializeField]
     private GameObject Ship;
+    [SerializeField]
+    private SpriteRenderer Jets;
 
     [SerializeField] 
     private GameObject Camera;
@@ -21,15 +23,19 @@ public class Movement : MonoBehaviour
 
     private Vector2 MoveDirection = Vector2.zero;
 
+    
+
     // Start is called before the first frame update
     void Start()
     {
+
     }
 
 
     private void OnEnable()
     {
         Controls.Enable();
+        Jets.enabled = false;
     }
 
     private void OnDisable()
@@ -41,12 +47,13 @@ public class Movement : MonoBehaviour
     {
         Controls = new Controls();
         Controls.Gameplay.Move.performed += Move_performed;
-        Controls.Gameplay.Move.canceled += context => MoveDirection = Vector2.zero;
+        Controls.Gameplay.Move.canceled += context => { MoveDirection = Vector2.zero; Jets.enabled = false; };
     }
 
     private void Move_performed(InputAction.CallbackContext context)
     {
         MoveDirection = context.ReadValue<Vector2>();
+        Jets.enabled = true;
         Debug.Log("Moving " + MoveDirection.x + "^" + MoveDirection.y);
 
     }
