@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Movement : MonoBehaviour
+public class PlayerScript : MonoBehaviour
 {
     [SerializeField]
     private GameObject Ship;
@@ -25,8 +25,8 @@ public class Movement : MonoBehaviour
     [SerializeField]
     private float FireRate = 1;
     private float TimeToNextFire = 0;
-
-    private float FireSpeed = 1;
+    [SerializeField]
+    private float FireSpeed = 0.2f;
     
 
     private Controls Controls;
@@ -82,9 +82,7 @@ public class Movement : MonoBehaviour
         {
             var maxRotationAngle = 180 * Time.deltaTime / RotationSpeed;
             var currentAngle = MakeAnglePossitive(Ship.transform.rotation.eulerAngles.z);
-            var angle = MakeAnglePossitive(((Mathf.Atan2(MoveDirection.y, MoveDirection.x) * Mathf.Rad2Deg) + 90));
-            var targetAngle = angle;
-            // a = 90 b = 89
+            var angle = MakeAnglePossitive(Mathf.Atan2(MoveDirection.y, MoveDirection.x) * Mathf.Rad2Deg - 90 );
             var diff = MakeAnglePossitive(currentAngle - angle);
 
             //do we have to animate this or can we just go with it?
@@ -110,7 +108,8 @@ public class Movement : MonoBehaviour
         TimeToNextFire -= Time.deltaTime;
         if (TimeToNextFire <= 0)
         {
-            Instantiate(WeaponPrefab, Ship.transform.position, Ship.transform.rotation,BuletHolder.transform);
+            var newbullet  = Instantiate(WeaponPrefab, Ship.transform.position, Ship.transform.rotation,BuletHolder.transform);
+            newbullet.GetComponent<BulletScript>().speed = FireSpeed;
             TimeToNextFire = FireRate;
         }
         
