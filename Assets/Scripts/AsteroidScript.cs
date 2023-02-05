@@ -36,6 +36,7 @@ public class AsteroidScript : MonoBehaviour
     [SerializeField]
     private float MinDistance = 2.0f;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -105,8 +106,17 @@ public class AsteroidScript : MonoBehaviour
             }
             
         }
+        Explode();
+    }
+
+
+    [SerializeField]
+    private List<AudioClip> Sounds = new List<AudioClip>();
+
+    void Explode()
+    {
+        var randomClip = Sounds[Random.Range(0, Sounds.Count)];
+        AudioSource.PlayClipAtPoint(randomClip, transform.position);
         Destroy(gameObject);
-
-
     }
 }

@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 4339130576651583113}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4334211653416969661}
@@ -96,7 +96,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Radius: 0.05
 --- !u!114 &4339130576651583115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,6 +110,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 0
+  Sounds:
+  - {fileID: 8300000, guid: b6c2cd88260c6014bb6404f7af306eb9, type: 3}
+  - {fileID: 8300000, guid: fe84933f992b9f44381269ba3b35e727, type: 3}
+  - {fileID: 8300000, guid: ab638bb7e8382bc4a889a34882a38dce, type: 3}
+  - {fileID: 8300000, guid: 80dab223925be7d409a41e61bcf7878b, type: 3}
+  - {fileID: 8300000, guid: b9c2c66bfaa0ddf428e90ea7122de98f, type: 3}
 --- !u!1001 &4339130577564325505
 PrefabInstance:
   m_ObjectHideFlags: 0

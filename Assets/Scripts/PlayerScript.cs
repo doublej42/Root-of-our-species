@@ -29,6 +29,8 @@ public class PlayerScript : MonoBehaviour
     private float TimeToNextFire = 0;
     [SerializeField]
     private float FireSpeed = 0.2f;
+
+    private bool dead = false;
     
 
     private Controls Controls;
@@ -46,6 +48,8 @@ public class PlayerScript : MonoBehaviour
 
     public GameObject XPHolder { get; private set; }
 
+    private XPHolderScript XpHolderScript;
+
     //private Rigidbody2D Rigid;
 
     // Start is called before the first frame update
@@ -53,6 +57,7 @@ public class PlayerScript : MonoBehaviour
     {
         //Rigid = gameObject.GetComponent<Rigidbody2D>(); 
         XPHolder = GameObject.FindGameObjectWithTag("XPHolder");
+        XpHolderScript = XPHolder.GetComponent<XPHolderScript>();
     }
 
 
@@ -79,10 +84,23 @@ public class PlayerScript : MonoBehaviour
         Controls = new Controls();
         Controls.Gameplay.Move.performed += Move_performed;
         Controls.Gameplay.Move.canceled += context => { MoveDirection = Vector2.zero; Jets.enabled = false; };
+        Controls.Gameplay.Exit.performed += Exit_performed;
+    }
+
+    private void Exit_performed(InputAction.CallbackContext obj)
+    {
+        Debug.Log("Exit");
+        if (dead)
+        {
+            Debug.Log("Calling quit");
+            Application.Quit();
+        }
     }
 
     private void Move_performed(InputAction.CallbackContext context)
     {
+        if (dead) return;
+        
         MoveDirection = context.ReadValue<Vector2>();
         //Rigid.velocity = context.ReadValue<Vector2>();
         Jets.enabled = true;
@@ -92,7 +110,11 @@ public class PlayerScript : MonoBehaviour
 
     void Update()
     {
-    
+        if (dead)
+        {
+            MoveDirection = Vector2.zero;
+            return;
+        }
         if (MoveDirection != Vector2.zero)
         {
             var maxRotationAngle = 180 * Time.deltaTime / RotationSpeed;
@@ -137,12 +159,17 @@ public class PlayerScript : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             var asteroidScript = collision.gameObject.GetComponent<AsteroidScript>();
-            var xpHolderScript = XPHolder.GetComponent<XPHolderScript>();
-            xpHolderScript.pendingXP -= asteroidScript.size;
+            
+            //xpHolderScript.pendingXP -= asteroidScript.size;
+            var xpToLoose = ((XpHolderScript.pendingXP / 5) + 1) * asteroidScript.size;
+            XpHolderScript.pendingXP -= xpToLoose;
 
-            if (xpHolderScript.pendingXP < 0)
+
+            if (XpHolderScript.pendingXP < 0)
             {
-                Destroy(gameObject);
+                Destroy(transform.GetChild(0).gameObject);
+                gameObject.GetComponent<CircleCollider2D>().enabled = false;
+                dead = true;
             }
         }
         

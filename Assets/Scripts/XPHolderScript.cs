@@ -10,7 +10,8 @@ public class XPHolderScript : MonoBehaviour
     public int finalXP=0;
     public int winXP = 100;
 
-    public TextMeshProUGUI textDisplay;
+    public TextMeshProUGUI textTop;
+    public TextMeshProUGUI textBottom;
     private SpriteRenderer spriteRenderer;
 
     [SerializeField]
@@ -25,23 +26,28 @@ public class XPHolderScript : MonoBehaviour
     {
         if (finalXP == 0 && pendingXP == 0)
         {
-            textDisplay.text = $"Shoot asteroids to make them drop the seeds of life, getting hit will cost you.";
+            textTop.text = $"Provide the roots of life for the planet. ";
+            textBottom.text = $"Shoot asteroids to make them drop the seeds.";
         }
         else if (pendingXP < 0)
         {
-            textDisplay.text = $"Game Over. Try not to crash";
+            textTop.text = $"Game Over. Try not to crash";
+            textBottom.text = $"Press esc or start to exit";
         }
         else if (finalXP == 0)
         {
-            textDisplay.text = $"Collected seeds: {pendingXP} Deliver them to the planet to start the roots of life";
+            textTop.text = $"Collected seeds: {pendingXP:D3} Deliver them to the planet";
+            textBottom.text = $"Getting hit will cost you undeposited seeds";
         }
         else if (finalXP < winXP)
         {
-            textDisplay.text = $"Collected seeds: {pendingXP} Life Goal {finalXP} / {winXP}";
+            textTop.text = $"Collected seeds: {pendingXP:D3} Life Goal {finalXP:D3} / {winXP}";
+            textBottom.text = $"Getting hit without any seeds will kill you.";
         }
         else
         {
-            textDisplay.text = $"Congratulations , you have won. Collected seeds: {pendingXP} Life Goal {finalXP} / {winXP}";
+            textTop.text = $"Congratulations , you have won. Keep playing for high score.";
+            textBottom.text = $"Collected seeds: {pendingXP:D3} Life Goal {finalXP:D3}";
         }
     }
 
