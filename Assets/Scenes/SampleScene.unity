@@ -312,7 +312,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -374,6 +374,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ToSpawn: {fileID: 7706132468958035608, guid: 2116671e066a8d4448bba36bf090752c, type: 3}
   Ship: {fileID: 750241588}
+  frequency: 1
+  speed: 1
 --- !u!4 &551633282
 Transform:
   m_ObjectHideFlags: 0
@@ -513,7 +515,7 @@ GameObject:
   - component: {fileID: 750241591}
   m_Layer: 6
   m_Name: Ship
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
