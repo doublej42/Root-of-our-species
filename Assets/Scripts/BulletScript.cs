@@ -13,6 +13,8 @@ public class BulletScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //var rigid = GetComponent<Rigidbody2D>();
+
     }
 
     // Update is called once per frame
@@ -25,7 +27,7 @@ public class BulletScript : MonoBehaviour
             //return;
         }
         //Debug.Log(transform.up.x + ", " + transform.up.y + ", " + transform.up.z);
-        transform.position += transform.up * Time.deltaTime * speed;
+        //transform.position += transform.up * Time.deltaTime * speed;
 
     }
 

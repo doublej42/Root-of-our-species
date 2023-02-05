@@ -70,8 +70,6 @@ public class AsteroidScript : MonoBehaviour
      
                 var vectorToShip3D = (ship.transform.position - newPos).normalized;
                 var vectorToShip2D = new Vector2(vectorToShip3D.x, vectorToShip3D.y);
-                // newItem.GetComponent<Rigidbody2D>().velocity = (collision.relativeVelocity + vectorToShip2D);
-                //newItem.GetComponent<Rigidbody2D>().velocity = (collision.relativeVelocity );
                 newItem.GetComponent<Rigidbody2D>().velocity = vectorToShip2D;
             }
         }
