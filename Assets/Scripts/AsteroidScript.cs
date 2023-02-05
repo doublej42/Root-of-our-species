@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Runtime.Serialization;
 using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class AsteroidScript : MonoBehaviour
 {
@@ -10,10 +11,11 @@ public class AsteroidScript : MonoBehaviour
     private GameObject SmallerGameObject = null;
 
     [SerializeField]
+    public int size;
+
+
     public float angularVelocity = 50f;
 
-    [SerializeField]
-    public int size;
  
 
 
@@ -22,8 +24,13 @@ public class AsteroidScript : MonoBehaviour
 
     //public Vector2 velocity;
 
-    private float invulnerableTime = 1.0f;
+    private float invulnerableTime = 0.25f;
+    
+    private int MaxAsteroids = 50;
 
+    private GameObject Ship;
+    
+    private float MaxDistance = 50f;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,13 +40,22 @@ public class AsteroidScript : MonoBehaviour
         rigid.angularVelocity = angularVelocity;
         //Debug.Log($"Asteroid Up {transform.up.x}, {transform.up.y}, {transform.up.z}");
         //rigid.velocity = velocity;
-        
+        Ship = GameObject.FindGameObjectWithTag("Player");
+
     }
 
     // Update is called once per frame
     void Update()
     {
         invulnerableTime -= Time.deltaTime;
+    }
+
+    private void FixedUpdate()
+    {
+        if (Vector3.Distance(transform.position,Ship.transform.position) > MaxDistance)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -57,23 +73,24 @@ public class AsteroidScript : MonoBehaviour
                 return; //ignore hitting smaller items;
             }
         }
-        if(SmallerGameObject != null)
+        if(SmallerGameObject != null && transform.parent.childCount < MaxAsteroids)
         {
             var numberOfChilderen = Random.Range(2, 6);
-            var ship = GameObject.FindGameObjectWithTag("Player");
-            float radius = 1f;
-    
+            
+            float radius = 0.5f * size;
+        
             for (var i = 0; i < numberOfChilderen;i++) {
                 float angle = i * Mathf.PI * 2f / numberOfChilderen;
                 var newPos = transform.position + new Vector3(Mathf.Cos(angle) * radius, Mathf.Sin(angle) * radius,0);
                 var newItem = Instantiate(SmallerGameObject, newPos, transform.rotation, transform.parent);
-     
-                var vectorToShip3D = (ship.transform.position - newPos).normalized;
+                var vectorToShip3D = (Ship.transform.position - newPos).normalized;
                 var vectorToShip2D = new Vector2(vectorToShip3D.x, vectorToShip3D.y);
                 newItem.GetComponent<Rigidbody2D>().velocity = vectorToShip2D;
             }
+            
         }
         Destroy(gameObject);
+
 
     }
 }

@@ -9,6 +9,7 @@ public class AsteroidSpawner : MonoBehaviour
     private GameObject ToSpawn;
     [SerializeField]
     private GameObject Ship;
+    
 
     [SerializeField]
     private float frequency = 1.0f;
@@ -16,6 +17,8 @@ public class AsteroidSpawner : MonoBehaviour
 
     [SerializeField]
     public float speed = 1f;
+    [SerializeField]
+    private int MaxAsteroids = 50;
 
     // Start is called before the first frame update
     void Start()
@@ -36,10 +39,14 @@ public class AsteroidSpawner : MonoBehaviour
 
     private void spawn()
     {
-        float radius = 20f;
+        if (transform.childCount >= MaxAsteroids)
+        {
+            return;
+        }
+        float radius = 15f;
         float angle = Random.Range(0, Mathf.PI * 2);
         var newPos = transform.position + new Vector3(Mathf.Cos(angle) * radius, Mathf.Sin(angle) * radius, 0);
-        var newItem = Instantiate(ToSpawn, newPos, Ship.transform.rotation);
+        var newItem = Instantiate(ToSpawn, newPos, Ship.transform.rotation,transform);
         newItem.GetComponent<Rigidbody2D>().velocity = (Ship.transform.position - newPos).normalized * speed;
     }
 }

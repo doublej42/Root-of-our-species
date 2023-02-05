@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7706132468958035611}
   - component: {fileID: 7706132468958035615}
   m_Layer: 7
-  m_Name: HugeAsteroid
+  m_Name: BigAsteroid
   m_TagString: Astroid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,9 +48,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Prefabs:
-  - {fileID: 8869476336097629157, guid: a928b6b7e9852c6429b1e3022b0ca7ed, type: 3}
-  - {fileID: 3525697572991576568, guid: 70c536de7d9d92449ae52a7ff80766e1, type: 3}
-  - {fileID: 6192019827025467921, guid: 46fd36c0039a3de4e8a017dd1652a1c9, type: 3}
+  - {fileID: 3955418798240587005, guid: 18bb600265b4a4a4fa29f69b9f5b8404, type: 3}
+  - {fileID: 6542101368399430838, guid: 5c3659959ebb30a489d7eef3009f8afc, type: 3}
+  - {fileID: 122214560388886015, guid: 0cc97290e5be8a24a95be78aef2fc1a6, type: 3}
+  - {fileID: 1416072628507055035, guid: 0d18f1a7832f6a44fa77efb30bde703e, type: 3}
 --- !u!114 &8204499482366993098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,9 +64,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 949bb20cda659d84a89649b43ef0af28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SmallerGameObject: {fileID: 7706132468958035608, guid: 653e9031240b7b74f8301954b76339ad, type: 3}
+  SmallerGameObject: {fileID: 7706132468958035608, guid: 3c86b6d1af34b564a9845ebb3c9d8ed9, type: 3}
   angularVelocity: 50
-  size: 4
+  size: 3
+  MaxAsteroids: 50
 --- !u!58 &7706132468958035611
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -100,7 +102,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1.5
+  m_Radius: 1
 --- !u!50 &7706132468958035615
 Rigidbody2D:
   serializedVersion: 4

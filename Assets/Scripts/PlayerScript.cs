@@ -53,13 +53,20 @@ public class PlayerScript : MonoBehaviour
 
     private void OnEnable()
     {
-        Controls.Enable();
+        if (Controls != null)
+        {
+            Controls.Enable();
+        }
+        
         Jets.enabled = false;
     }
 
     private void OnDisable()
     {
-        Controls.Disable();
+        if (Controls != null)
+        {
+            Controls.Disable();
+        }
     }
 
     private void Awake()
