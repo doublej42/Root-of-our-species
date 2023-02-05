@@ -12,9 +12,10 @@ public class PlayerScript : MonoBehaviour
     //private GameObject Ship;
     [SerializeField]
     private SpriteRenderer Jets;
+    [SerializeField]
+    private SpriteRenderer Graphics;
 
 
-   
 
     [SerializeField] 
     private GameObject Camera;
@@ -89,10 +90,10 @@ public class PlayerScript : MonoBehaviour
 
     private void Exit_performed(InputAction.CallbackContext obj)
     {
-        Debug.Log("Exit");
+        //Debug.Log("Exit");
         if (dead)
         {
-            Debug.Log("Calling quit");
+            //Debug.Log("Calling quit");
             Application.Quit();
         }
     }
@@ -167,7 +168,8 @@ public class PlayerScript : MonoBehaviour
 
             if (XpHolderScript.pendingXP < 0)
             {
-                Destroy(transform.GetChild(0).gameObject);
+                //Destroy(transform.GetChild(0).gameObject);
+                Graphics.enabled = false;
                 gameObject.GetComponent<CircleCollider2D>().enabled = false;
                 dead = true;
             }

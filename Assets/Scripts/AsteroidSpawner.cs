@@ -45,7 +45,8 @@ public class AsteroidSpawner : MonoBehaviour
         }
         float radius = 15f;
         float angle = Random.Range(0, Mathf.PI * 2);
-        var newPos = transform.position + new Vector3(Mathf.Cos(angle) * radius, Mathf.Sin(angle) * radius, 0);
+        var newPos = Ship.transform.position + new Vector3(Mathf.Cos(angle) * radius, Mathf.Sin(angle) * radius, 0);
+        Debug.Log($"New Pos {newPos.x} , {newPos.y}");
         var newItem = Instantiate(ToSpawn, newPos, Ship.transform.rotation,transform);
         newItem.GetComponent<Rigidbody2D>().velocity = (Ship.transform.position - newPos).normalized * speed;
     }

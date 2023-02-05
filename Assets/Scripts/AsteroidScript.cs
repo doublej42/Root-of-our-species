@@ -34,7 +34,7 @@ public class AsteroidScript : MonoBehaviour
     
     private float MaxDistance = 50f;
     [SerializeField]
-    private float MinDistance = 2.0f;
+    private float MinDistance = 1f;
 
 
     // Start is called before the first frame update

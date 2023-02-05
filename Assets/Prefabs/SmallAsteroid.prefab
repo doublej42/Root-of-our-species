@@ -70,7 +70,7 @@ MonoBehaviour:
   size: 1
   xp: {fileID: 4339130576651583113, guid: 46ddebb913421a247ae841230207f7e6, type: 3}
   angularVelocity: 50
-  MinDistance: 2
+  MinDistance: 0.75
   Sounds:
   - {fileID: 8300000, guid: 01f7ba58cf5258647813c9d953000be9, type: 3}
   - {fileID: 8300000, guid: ab4383958b664024b80c2eb91d83375f, type: 3}
