@@ -13,6 +13,8 @@ public class AsteroidScript : MonoBehaviour
     [SerializeField]
     public int size;
 
+    [SerializeField]
+    private GameObject xp;
 
     public float angularVelocity = 50f;
 
@@ -31,6 +33,9 @@ public class AsteroidScript : MonoBehaviour
     private GameObject Ship;
     
     private float MaxDistance = 50f;
+    [SerializeField]
+    private float MinDistance = 2.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -64,7 +69,7 @@ public class AsteroidScript : MonoBehaviour
         {
             return;
         }
-        Debug.Log($"Astroid Hit {collision.gameObject.name}");
+        //Debug.Log($"Astroid Hit {collision.gameObject.name}");
         if (collision.gameObject.layer == gameObject.layer)
         {
 
@@ -72,6 +77,13 @@ public class AsteroidScript : MonoBehaviour
             {
                 return; //ignore hitting smaller items;
             }
+        }
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Bullet"))
+        {
+            //Debug.LogWarning("spawning XP");
+            var xpHolder = GameObject.FindGameObjectWithTag("XPHolder");
+            var xpGem = Instantiate(xp,transform.position,transform.rotation,xpHolder.transform);
+            xpGem.GetComponent<XPScript>().value = size;
         }
         if(SmallerGameObject != null && transform.parent.childCount < MaxAsteroids)
         {
@@ -82,10 +94,14 @@ public class AsteroidScript : MonoBehaviour
             for (var i = 0; i < numberOfChilderen;i++) {
                 float angle = i * Mathf.PI * 2f / numberOfChilderen;
                 var newPos = transform.position + new Vector3(Mathf.Cos(angle) * radius, Mathf.Sin(angle) * radius,0);
-                var newItem = Instantiate(SmallerGameObject, newPos, transform.rotation, transform.parent);
-                var vectorToShip3D = (Ship.transform.position - newPos).normalized;
-                var vectorToShip2D = new Vector2(vectorToShip3D.x, vectorToShip3D.y);
-                newItem.GetComponent<Rigidbody2D>().velocity = vectorToShip2D;
+                if (Vector3.Distance(newPos, Ship.transform.position) > MinDistance)
+                {
+                    var newItem = Instantiate(SmallerGameObject, newPos, transform.rotation, transform.parent);
+                    var vectorToShip3D = (Ship.transform.position - newPos).normalized;
+                    var vectorToShip2D = new Vector2(vectorToShip3D.x, vectorToShip3D.y);
+                    newItem.GetComponent<Rigidbody2D>().velocity = vectorToShip2D;
+                }
+                
             }
             
         }

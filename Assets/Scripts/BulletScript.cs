@@ -23,7 +23,7 @@ public class BulletScript : MonoBehaviour
         lifeTimeRemaining -= Time.deltaTime;
         if (lifeTimeRemaining < 0)
         {
-            //Destroy(this.gameObject);
+            Destroy(this.gameObject);
             //return;
         }
         //Debug.Log(transform.up.x + ", " + transform.up.y + ", " + transform.up.z);
@@ -32,9 +32,10 @@ public class BulletScript : MonoBehaviour
     }
 
 
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log($"Bullet collision {collision.gameObject.name}");
+        //Debug.Log($"Bullet collision {collision.gameObject.name}");
         Destroy(this.gameObject);
     }
 }

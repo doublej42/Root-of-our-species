@@ -67,8 +67,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SmallerGameObject: {fileID: 0}
-  angularVelocity: 50
   size: 1
+  xp: {fileID: 4339130576651583113, guid: 46ddebb913421a247ae841230207f7e6, type: 3}
+  angularVelocity: 50
 --- !u!58 &7706132468958035611
 CircleCollider2D:
   m_ObjectHideFlags: 0

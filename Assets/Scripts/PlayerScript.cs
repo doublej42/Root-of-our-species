@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.Rendering.DebugUI;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -42,12 +44,15 @@ public class PlayerScript : MonoBehaviour
     [SerializeField]
     private GameObject WeaponPrefab;
 
+    public GameObject XPHolder { get; private set; }
+
     //private Rigidbody2D Rigid;
 
     // Start is called before the first frame update
     void Start()
     {
         //Rigid = gameObject.GetComponent<Rigidbody2D>(); 
+        XPHolder = GameObject.FindGameObjectWithTag("XPHolder");
     }
 
 
@@ -127,6 +132,21 @@ public class PlayerScript : MonoBehaviour
 
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        {
+            var asteroidScript = collision.gameObject.GetComponent<AsteroidScript>();
+            var xpHolderScript = XPHolder.GetComponent<XPHolderScript>();
+            xpHolderScript.pendingXP -= asteroidScript.size;
+
+            if (xpHolderScript.pendingXP < 0)
+            {
+                Destroy(gameObject);
+            }
+        }
+        
+    }
     private float MakeAnglePossitive(float input)
     {
         while (input < 0)

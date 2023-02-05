@@ -66,9 +66,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SmallerGameObject: {fileID: 7706132468958035608, guid: 069402b73e48bb94e88151036f3c5fa9, type: 3}
-  angularVelocity: 50
   size: 2
-  MaxAsteroids: 50
+  xp: {fileID: 4339130576651583113, guid: 46ddebb913421a247ae841230207f7e6, type: 3}
+  angularVelocity: 50
 --- !u!58 &7706132468958035611
 CircleCollider2D:
   m_ObjectHideFlags: 0
